@@ -1,8 +1,5 @@
 # small app to notify you when a spot on the pota.app website can actually be heard, by comparing to spots from a local rbn node.
 
-# to-do: 
-# 4. Get into github
-
 import configparser
 from selenium import webdriver
 from selenium.webdriver.common.by import By
