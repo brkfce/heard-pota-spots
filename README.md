@@ -7,7 +7,7 @@ To let you know that a spot has been heard, a discord message is sent.
 ### settings.ini
 Upon first cloning this repo, rename "CHANGE_ME_settings.ini" to "settings.ini". Then edit the file to 
 1. Customise the RBN spotter to one closest to your QTH.
-2. Select whether the script should use firefox or chrome to scrape the two websites. Whichever you choose will need to be installed on the machine running the script.
+2. Select whether the script should use firefox or chrome to scrape the two websites. Whichever you choose will need to be installed on the machine running the script. If trying to run on a raspberry pi, do "sudo apt-get install chromium-chromedriver" then use the "chrome" setting in settings.ini
 3. Add the webhook URL for the discord channel the script should message in to. You may need to create a private discord server to host this channel if you do not already have one. Once the server is made, make a channel, then right click on the channel -> Edit Channel -> Integrations -> Webhooks -> New Webhook. Enter a name that the messages will come from, and copy the URL into this settings file.
 
 ### Python dependencies
