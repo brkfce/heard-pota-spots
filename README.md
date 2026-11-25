@@ -13,7 +13,7 @@ Upon first cloning this repo, rename "CHANGE_ME_settings.ini" to "settings.ini".
 ### Python dependencies
 Before running the script, you should create a virtual environment (venv), activate it, and then use pip to install the dependencies listed in the requirements.txt file. Instructions to do that are as follows:
 1. Open a terminal window in this folder
-2. "python -m venv"
+2. "python -m venv ./"
 3. ".venv\Scripts\activate"
 4. "pip install -r requirements.txt"
 The requirements includes the dependencies of the "core" dependencies. If you would prefer to just install the core ones directly, they are "selenium" and "requests". 
