@@ -95,7 +95,7 @@ def main() -> None:
 	
 	for spot in matches:
 		
-		print(rbn_node + ' just heard ' + spot'!')
+		print(rbn_node + ' just heard ' + spot + '!')
 		try:
 			message = '' + rbn_node + ' just heard ' + spot + '!'
 			message_package = {"content": message}
