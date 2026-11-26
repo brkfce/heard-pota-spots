@@ -21,12 +21,15 @@ def get_settings(settings_path):
 	return settings
 
 
-def get_rbn_spots(rbn_node, driver_options):
+def get_rbn_spots(rbn_node, driver_options, browser):
 
 	rbn_url = 'https://reversebeacon.net/main.php?max_age=10,minutes&rows=100&modes=cw&spot_types=1,2,3,4,5&spotter_call=' + rbn_node + '&hide=distance_km'
 
 	# get dynamic content from RBN
-	driver = webdriver.Firefox(options=driver_options)
+	if browser == 'firefox':
+		driver = webdriver.Firefox(options=driver_options)
+	elif browser == 'chrome':
+		driver = webdriver.Chrome(options=driver_options)
 	try:
 		driver.get(rbn_url)
 	except:
@@ -43,12 +46,15 @@ def get_rbn_spots(rbn_node, driver_options):
 	return heard_calls
 
 
-def get_pota_spots(driver_options):
+def get_pota_spots(driver_options, browser):
 
 	pota_url = 'https://pota.app'
 	
 	# get dynamic content from pota.app
-	driver = webdriver.Firefox(options=driver_options)
+	if browser == 'firefox':
+		driver = webdriver.Firefox(options=driver_options)
+	elif browser == 'chrome':
+		driver = webdriver.Chrome(options=driver_options)
 	try:
 		driver.get(pota_url)
 	except:
@@ -71,21 +77,24 @@ def main() -> None:
 	settings = get_settings(settings_path)
 	
 	if settings['browser'] == 'firefox':
+		browser = 'firefox'
 		driver_options = webdriver.FirefoxOptions()
+		driver_options.add_argument('--headless=new')
 	elif settings['browser'] == 'chrome':
 		driver_options = webdriver.ChromeOptions()
+		driver_options.add_argument('--headless=new')
+		browser = 'chrome'
 	else: 
 		print('Invalid browser selected in settings.ini, please amend')
 		exit()
 
-	driver_options.add_argument('--headless=new')
-
 	rbn_node = settings['local_rbn']
-	rbn_spots = get_rbn_spots(rbn_node, driver_options)
+	rbn_spots = get_rbn_spots(rbn_node, driver_options, browser)
 
 	# I was going to try and filter the POTA website content by mode so we only get CW spots, but we'll only get CW spots from RBN... so no non-CW spot will come through when we compare lists!
-	pota_spots = get_pota_spots(driver_options)
+	pota_spots = get_pota_spots(driver_options, browser)
 	
+
 	# find spots that appear on both RBN and POTA
 	matches = set(pota_spots).intersection(rbn_spots)
 	
